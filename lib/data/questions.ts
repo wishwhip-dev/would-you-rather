@@ -64,11 +64,16 @@ export function getQuestion(id: string): WouldYouRatherQuestion {
 }
 
 /** Fisher–Yates shuffle returning a new array; used to build and rebuild the round deck. */
-export function shuffleQuestionIds(): string[] {
-  const ids = QUESTIONS.map((question) => question.id);
-  for (let i = ids.length - 1; i > 0; i -= 1) {
+export function shuffleArray<T>(items: readonly T[]): T[] {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
-    [ids[i], ids[j]] = [ids[j]!, ids[i]!];
+    [result[i], result[j]] = [result[j]!, result[i]!];
   }
-  return ids;
+  return result;
+}
+
+/** A freshly shuffled full deck of question ids. */
+export function shuffleQuestionIds(): string[] {
+  return shuffleArray(QUESTIONS.map((question) => question.id));
 }
