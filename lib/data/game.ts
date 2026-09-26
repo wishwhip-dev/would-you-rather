@@ -39,7 +39,7 @@ export async function recordVote(questionId: string, choice: VoteChoice): Promis
 const DEFAULT_STREAK: StreakState = { key: "streak", currentStreak: 0, bestStreak: 0 };
 
 async function readStreakRow(): Promise<StreakState> {
-  return (await stateTable()).get("streak") ?? DEFAULT_STREAK;
+  return (await (await stateTable()).get("streak")) ?? DEFAULT_STREAK;
 }
 
 export async function getStreak(): Promise<{ current: number; best: number }> {
