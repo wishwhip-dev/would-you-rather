@@ -238,7 +238,7 @@ export function StatsView({ onReset }: { onReset: () => void }) {
       ) : null}
       {transferState.kind === "imported" ? (
         <p className="text-sm font-medium text-muted-foreground">
-          Import complete: {transferState.result.imported} rows applied.
+          Import complete: {transferState.result.rows} rows applied.
         </p>
       ) : null}
     </div>
