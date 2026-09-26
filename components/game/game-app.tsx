@@ -40,7 +40,9 @@ type View =
 
 export function GameApp() {
   const storageStatus = useStorageStatus(database);
-  const [deck, setDeck] = useState<string[]>(() => shuffleQuestionIds());
+  // Deterministic first render: the server and the client's hydration pass must show the same
+  // first question, so the deck starts in pool order and is only shuffled after interaction.
+  const [deck, setDeck] = useState<string[]>(() => QUESTIONS.map((question) => question.id));
   const [deckPos, setDeckPos] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [view, setView] = useState<View>({ kind: "choice" });
